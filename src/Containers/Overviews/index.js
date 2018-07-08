@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {CompanyForm,OfficeForm} from '../../Components'
+import {Box,CompanyForm,OfficeForm} from '../../Components'
 import './Overviews.css'
 
 class Overviews extends Component {
@@ -14,6 +14,10 @@ class Overviews extends Component {
             <div className="col-md-6">
               <OfficeForm/>
             </div>
+          </div>
+          <div className="row">
+            <Box/>
+            <Box/>
           </div>
         </div>
       </div>
