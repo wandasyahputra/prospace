@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {dispatchAddCompanyProfile} from '../../dispatcher';
-import {RE1,RE2} from '../../action/constant.js'
+import {RE1} from '../../action/constant.js'
 
 class CompanyForm extends Component {
   constructor(props){
@@ -12,7 +12,6 @@ class CompanyForm extends Component {
       revenue:'',
       cCode:'+62',
       phone:''
-
     }
     this.createCompany = this.createCompany.bind(this)
     this.changeState = this.changeState.bind(this)
@@ -20,6 +19,14 @@ class CompanyForm extends Component {
   createCompany(){
     if((this.state.name!=='')&&(this.state.address!=='')&&(this.state.revenue!=='')&&(this.state.cCode!=='')&&(this.state.phone!=='')){
       this.props.addCompanyProfile(this.state)
+      this.props.success()
+      this.setState({
+        name:'',
+        address:'',
+        revenue:'',
+        cCode:'+62',
+        phone:''
+      })
     }else{
       console.log(this.state);
       document.getElementsByClassName('companyForm')[0].className='needs-validation was-validated companyForm'
@@ -91,11 +98,6 @@ class CompanyForm extends Component {
   }
 }
 
-const mapStateToProps = ({companyProfile}) => {
-  return {
-    companyProfile: companyProfile,
-  }
-}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -105,4 +107,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect (mapStateToProps, mapDispatchToProps)(CompanyForm)
+export default connect ('', mapDispatchToProps)(CompanyForm)

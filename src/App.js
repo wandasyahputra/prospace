@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
-import {Offices, Overviews} from './Containers'
-import { BrowserRouter,Route, Redirect, Switch }from 'react-router-dom';
+import {Offices,Overviews} from './Containers'
 import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      page:'overviews',
+      companyId:''
+    }
+    this.changePage = this.changePage.bind(this)
+  }
+  changePage(data){
+    this.setState({
+      page:data.page,
+      companyId:data.companyId
+    })
+  }
   render() {
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/overview' component={Overviews}/>
-          <Route exact path='/offices' component={Offices}/>
-          <Redirect to={'/overview'}></Redirect>
-        </Switch>
-      </BrowserRouter>
+      <div>
+        {this.state.page==='offices'?(
+          <Offices changePage={this.changePage} companyId={this.state.companyId}/>
+        ):(
+          <Overviews changePage={this.changePage}/>
+        )}
+      </div>
     );
   }
 }
