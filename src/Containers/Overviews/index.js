@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+import {dispatchRemoveCompanyProfile} from '../../dispatcher';
 import {Box,CompanyForm,OfficeForm} from '../../Components'
 import './Overviews.css'
 
@@ -16,8 +18,20 @@ class Overviews extends Component {
             </div>
           </div>
           <div className="row">
-            <Box/>
-            <Box/>
+            {this.props.companyProfile&&this.props.companyProfile.map((item,key)=>(
+              <Box
+                key={key}
+                type="overview"
+                data={
+                  {
+                    Name:item.name,
+                    Address:item.address,
+                    Revenue:item.revenue,
+                    Phone_no:`(${item.cCode}) ${item.phone}`
+                  }
+                }
+            />
+            ))}
           </div>
         </div>
       </div>
@@ -25,4 +39,18 @@ class Overviews extends Component {
   }
 }
 
-export default Overviews;
+const mapStateToProps = ({company}) => {
+  return {
+    companyProfile: company.dataCompanyProfile,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removeCompanyProfile: (data) => {
+      dispatch(dispatchRemoveCompanyProfile(data))
+    },
+  }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(Overviews)
