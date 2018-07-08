@@ -2,6 +2,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 This project create for fullfill assessment from [prospace.io](https://prospace.io).
 
+Demo of this project can be fine on [here](https://prospaceassessment.herokuapp.com/)
+
 ## Getting Started
 
 This app tested on
@@ -21,4 +23,4 @@ npm start
 
 ## Authors
 
-* **Wanda Syahputra** - *Initial work* - [wandasyahputra](https://github.com/wandasyahputra)
+* **Wanda Syahputra** - [wandasyahputra](https://github.com/wandasyahputra)
