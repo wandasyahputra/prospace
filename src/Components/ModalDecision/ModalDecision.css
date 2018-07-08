@@ -1,0 +1,13 @@
+.modal-decision{
+  display: block;
+}
+.Overlay{
+  z-index: 2;
+  opacity: .2;
+  background-color: #000;
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+  top:0;
+  left:0;
+}
