@@ -9,7 +9,8 @@ class Overviews extends Component {
     super(props);
     this.state = {
       modal:false,
-      company:{}
+      company:{},
+      alert:false
     }
     this.removeCompany = this.removeCompany.bind(this)
     this.resetState = this.resetState.bind(this)
@@ -45,10 +46,19 @@ class Overviews extends Component {
             cancel={()=>this.resetState()}
           />)
         }
+        {this.state.alert&&(
+          <div class="alert alert-success" role="alert">
+            A company has been created
+            <button type="button" className="close" onClick={()=>this.setState({alert:false})}>
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        )}
         <div className="Overviews">
           <div className="row">
             <div className="col-md-6">
-              <CompanyForm/>
+              <CompanyForm
+              success={()=>this.setState({alert:true})}/>
             </div>
             <div className="col-md-6">
               <OfficeForm/>
