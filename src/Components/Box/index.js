@@ -12,14 +12,15 @@ class Box extends Component {
     return (
       <div className="col-md-6">
         <div className="BoxCard">
+
           <div className="header">
-            <h4>{this.props.data.Name}</h4>
+            <h4 onClick={this.props.changePage&&this.props.changePage}>{this.props.data.Name}</h4>
             <i className="material-icons" onClick={this.props.remove}>close</i>
           </div>
           {
             headKeys&&headKeys.map((item,key)=>(
             <div className="content">
-              <div className="content-label">{item.replace('_',' ')}</div>
+              <div className="content-label">{item.replace('_',' ')} :</div>
               <div className="content-body">{headValues[key]}</div>
             </div>
           ))

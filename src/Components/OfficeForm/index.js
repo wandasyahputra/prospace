@@ -44,7 +44,7 @@ class OfficeForm extends Component {
         name:this.state.name,
         office_start_date:this.state.office_start_date,
       })
-      window.location('offices/this.state.company')
+      this.props.changePage(this.state.company)
     }else{
       console.log(this.state);
       document.getElementsByClassName('officeForm')[0].className='needs-validation was-validated officeForm'

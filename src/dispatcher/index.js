@@ -15,6 +15,11 @@ export const dispatchAddCompanyOffice = (data) => {
     dispatch(actionAddCompanyOffice(data))
   }
 }
+export const dispatchRemoveCompanyOffice = (data) => {
+  return dispatch => {
+    dispatch(actionRemoveCompanyOffice(data))
+  }
+}
 export const dispatchRemoveCompanyProfile = (data) => {
   return dispatch => {
     dispatch(actionRemoveCompanyProfile(data))

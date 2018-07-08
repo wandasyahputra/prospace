@@ -46,17 +46,19 @@ const addCompanyOffice = (state, data) => {
 }
 
 const removeCompanyOffice = (state, data) => {
+  console.log(data);
   let temp = []
   let temp_state = state.dataCompanyProfile
   for(let i = 0;i < temp_state.length; i++){
     if(temp_state[i].id===parseInt(data.company_id)){
       let temp_office=[]
       let temp_office_state=temp_state[i].office
-      for(let i = 0;i < temp_office_state.length; i++){
-        if(temp_office_state[i].id!==data.id){
+      for(let x = 0;x < temp_office_state.length; x++){
+        if(temp_office_state[x].id!==parseInt(data.id)){
           temp_office.push(temp_office_state[i])
         }
       }
+      temp_state[i].office=temp_office
     }
     temp.push(temp_state[i])
   }

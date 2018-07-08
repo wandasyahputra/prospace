@@ -14,6 +14,7 @@ class Overviews extends Component {
     }
     this.removeCompany = this.removeCompany.bind(this)
     this.resetState = this.resetState.bind(this)
+    this.changePage = this.changePage.bind(this)
   }
   callModal(id,name){
     console.log('hereeee');
@@ -34,6 +35,12 @@ class Overviews extends Component {
   removeCompany(){
     this.props.removeCompanyProfile(this.state.company.id)
     this.resetState()
+  }
+  changePage(companyId){
+    this.props.changePage({
+      page:'offices',
+      companyId:companyId
+    })
   }
   render() {
     return (
@@ -61,11 +68,13 @@ class Overviews extends Component {
               success={()=>this.setState({alert:true})}/>
             </div>
             <div className="col-md-6">
-              <OfficeForm/>
+              <OfficeForm
+                changePage={this.changePage}
+              />
             </div>
           </div>
           <div className="row">
-            {this.props.companyProfile&&this.props.companyProfile.map((item,key)=>(
+            {this.props.companyProfile&&this.props.companyProfile.length>0?(this.props.companyProfile.map((item,key)=>(
               <Box
                 key={key}
                 type="overview"
@@ -77,9 +86,10 @@ class Overviews extends Component {
                     Phone_no:`(${item.cCode}) ${item.phone}`
                   }
                 }
+                changePage={()=>this.changePage(item.id)}
                 remove={()=>this.callModal(item.id,item.name)}
             />
-            ))}
+          ))):(<h3 className="makeitcenter">There is no companies created yet</h3>)}
           </div>
         </div>
       </div>
