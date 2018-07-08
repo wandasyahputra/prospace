@@ -45,7 +45,13 @@ const addCompanyOffice = (state, data) => {
 }
 
 const removeCompanyProfile = (state, data) => {
-  let temp = state.dataCompanyProfile.map((item,key)=>{return item.id!==data.id})
+  let temp = []
+  let temp_state = state.dataCompanyProfile
+  for(let i = 0;i < temp_state.length; i++){
+    if(temp_state[i].id!==data){
+      temp.push(temp_state[i])
+    }
+  }
   let newState = {
     ...state,
     dataCompanyProfile: temp
@@ -58,8 +64,6 @@ export default(state = initialState, {type, payload}) => {
       return addCompanyOffice(state, payload)
     case ADD_COMPANY_PROFILE:
       return addCompanyProfile(state, payload)
-    case REMOVE_COMPANY_ADDRESS:
-      return removeCompanyProfile(state, payload)
     case REMOVE_COMPANY_PROFILE:
       return removeCompanyProfile(state, payload)
     default:

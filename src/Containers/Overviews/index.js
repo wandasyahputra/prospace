@@ -1,13 +1,50 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {dispatchRemoveCompanyProfile} from '../../dispatcher';
-import {Box,CompanyForm,OfficeForm} from '../../Components'
+import {Box,CompanyForm,OfficeForm,ModalDecision} from '../../Components'
 import './Overviews.css'
 
 class Overviews extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      modal:false,
+      company:{}
+    }
+    this.removeCompany = this.removeCompany.bind(this)
+    this.resetState = this.resetState.bind(this)
+  }
+  callModal(id,name){
+    console.log('hereeee');
+    this.setState({
+      company:{
+        id,
+        name
+      },
+      modal:true,
+    })
+  }
+  resetState(){
+    this.setState({
+      company:{},
+      modal:false
+    })
+  }
+  removeCompany(){
+    this.props.removeCompanyProfile(this.state.company.id)
+    this.resetState()
+  }
   render() {
     return (
       <div className="container">
+        {this.state.modal&&
+          (<ModalDecision
+            title='Remove Company'
+            desc={`Do you want to remove ${this.state.company.name}?`}
+            doDecision={()=>this.removeCompany()}
+            cancel={()=>this.resetState()}
+          />)
+        }
         <div className="Overviews">
           <div className="row">
             <div className="col-md-6">
@@ -30,6 +67,7 @@ class Overviews extends Component {
                     Phone_no:`(${item.cCode}) ${item.phone}`
                   }
                 }
+                remove={()=>this.callModal(item.id,item.name)}
             />
             ))}
           </div>
