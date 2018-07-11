@@ -2,7 +2,10 @@ import {
   actionAddCompanyProfile,
   actionRemoveCompanyProfile,
   actionAddCompanyOffice,
-  actionRemoveCompanyOffice
+  actionRemoveCompanyOffice,
+  actionAddMeetingRoom,
+  actionRemoveMeetingRoom,
+  actionRestoreCompanyData
 } from '../action/company.js'
 
 export const dispatchAddCompanyProfile = (data) => {
@@ -23,5 +26,21 @@ export const dispatchRemoveCompanyOffice = (data) => {
 export const dispatchRemoveCompanyProfile = (data) => {
   return dispatch => {
     dispatch(actionRemoveCompanyProfile(data))
+  }
+}
+export const dispatchAddMeetingRoom = (data) => {
+  console.log('sini    ',data);
+  return dispatch => {
+    dispatch(actionAddMeetingRoom(data))
+  }
+}
+export const dispatchRemoveMeetingRoom = (data) => {
+  return dispatch => {
+    dispatch(actionRemoveMeetingRoom(data))
+  }
+}
+export const dispatchRestoreCompanyData = (data) => {
+  return dispatch => {
+    dispatch(actionRestoreCompanyData(data))
   }
 }
