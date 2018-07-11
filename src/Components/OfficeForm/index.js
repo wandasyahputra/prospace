@@ -42,6 +42,7 @@ class OfficeForm extends Component {
         lat:this.state.lat,
         lng:this.state.lng,
         name:this.state.name,
+        meeting_room:[],
         office_start_date:this.state.office_start_date,
       })
       this.props.changePage(this.state.company)

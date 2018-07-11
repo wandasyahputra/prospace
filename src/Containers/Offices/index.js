@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Box,ModalDecision} from "../../Components"
+import {Box,ModalDecision,RoomForm} from "../../Components"
 import {connect} from 'react-redux'
 import {dispatchRemoveCompanyOffice} from '../../dispatcher';
 import './Offices.css'
@@ -39,20 +39,26 @@ class Offices extends Component {
     })
     this.resetState()
   }
-  changePage(){
-    this.props.changePage({
-      page:'overviews',
-      companyId:''
-    })
+  changePage(id){
+    if(id){
+      this.props.changePage({
+        page:'rooms',
+        companyId:this.props.companyId,
+        officeId:id
+      })
+    }else {
+      this.props.changePage({
+        page:'overviews',
+        companyId:'',
+        officeId:''
+      })
+    }
   }
   render() {
     let that=this
     var found = this.props.companyProfile.find(function(element) {
-      console.log(element);
-      return element.id === parseInt(that.props.companyId);
+      return element.id === parseInt(that.props.companyId,10);
     });
-    console.log(found);
-    console.log(that.props.companyId);
     return (
       <div className="container">
         {this.state.modal&&
@@ -84,6 +90,12 @@ class Offices extends Component {
             </div>
             <button className="btn btn-primary bottomRight-absolute" onClick={()=>this.changePage()}>Back To Overviews</button>
           </div>
+          <div>
+            <RoomForm
+              companyId={found.id}
+              changePage={this.props.changePage}
+            />
+          </div>
           <div className="row box-container">
             {found.office?(found.office.length>0&&found.office.map((item,key)=>{
               let date= item.office_start_date.split('-')
@@ -96,9 +108,11 @@ class Offices extends Component {
                       Name:item.name,
                       Location_Lat:item.lat,
                       Location_Lng:item.lng,
-                      Office_Start_Date:`${date[2]}/${date[1]}/${date[0]}`
+                      Office_Start_Date:`${date[2]}/${date[1]}/${date[0]}`,
+                      Meeting_room:item.meeting_room.length
                     }
                   }
+                  changePage={()=>this.changePage(item.id)}
                   remove={()=>this.callModal(item.id,item.name,found.id)}
                 />
               )

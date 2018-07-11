@@ -54,7 +54,7 @@ class Overviews extends Component {
           />)
         }
         {this.state.alert&&(
-          <div class="alert alert-success" role="alert">
+          <div className="alert alert-success" role="alert">
             A company has been created
             <button type="button" className="close" onClick={()=>this.setState({alert:false})}>
               <span aria-hidden="true">&times;</span>
@@ -74,8 +74,13 @@ class Overviews extends Component {
             </div>
           </div>
           <div className="row">
-            {this.props.companyProfile&&this.props.companyProfile.length>0?(this.props.companyProfile.map((item,key)=>(
-              <Box
+            {this.props.companyProfile&&this.props.companyProfile.length>0?(this.props.companyProfile.map((item,key)=>{
+              let room = 0
+              for(let i = 0; i < item.office.length; i++){
+                room=room+item.office[i].meeting_room.length
+              }
+              console.log('herer');
+              return (<Box
                 key={key}
                 type="overview"
                 data={
@@ -83,13 +88,15 @@ class Overviews extends Component {
                     Name:item.name,
                     Address:item.address,
                     Revenue:item.revenue,
-                    Phone_no:`(${item.cCode}) ${item.phone}`
+                    Phone_no:`(${item.cCode}) ${item.phone}`,
+                    Number_of_office:item.office.length,
+                    Number_of_meeting_room:room
                   }
                 }
                 changePage={()=>this.changePage(item.id)}
                 remove={()=>this.callModal(item.id,item.name)}
-            />
-          ))):(<h3 className="makeitcenter">There is no companies created yet</h3>)}
+            />)
+          })):(<h3 className="makeitcenter">There is no companies created yet</h3>)}
           </div>
         </div>
       </div>
