@@ -112,7 +112,7 @@ class Rooms extends Component {
                 />
               )
             }
-          )):(<h3>There is no office created yet</h3>)}
+          )):(<h3>There is no room created yet</h3>)}
           </div>
         </div>
       </div>
