@@ -38,7 +38,6 @@ class RoomForm extends Component {
     }
   }
   createRoom(){
-    console.log(this.state);
     if((this.state.name!=='')&&(this.state.lat!=='')&&(this.state.lng!=='')&&(this.state.office_start_date!=='')&&(this.state.company!=='')){
       this.props.addMeetingRoom({
         company_id:this.props.companyId,
@@ -50,25 +49,19 @@ class RoomForm extends Component {
         size:this.state.size,
         seat:this.state.seat,
       })
-      this.props.changePage({
-        page:'rooms',
-        companyId:this.props.companyId,
-        officeId:this.state.office
-      })
+      window.location=`/company/${this.props.companyId}/office/${this.state.office}`
     }else{
-      console.log(this.state);
       document.getElementsByClassName('roomForm')[0].className='needs-validation was-validated roomForm'
     }
   }
   render() {
     let that = this
-    console.log(that.props.companyId);
     let office=[]
     this.props.companyProfile&&this.props.companyProfile.map((item,key)=>{
-      console.log(item.id);
       if(item.id===that.props.companyId){
         office = item.office
       }
+      return (office)
     })
     return (
       <div className="roomFormContainer">
@@ -113,9 +106,11 @@ class RoomForm extends Component {
             <label htmlFor="validationOffice">Office</label>
               <select className="form-control" onChange={(e)=>(this.changeState('office',e))} value={this.state.office} required>
                 <option value='' disabled >Plese Select</option>
-                {office&&office.map((item,key)=>(
-                  <option value={item.id} key={key}>{item.name}</option>
-                ))}
+                {office&&office.map((item,key)=>{
+                    return(
+                    <option value={item.id} key={key}>{item.name}</option>)}
+
+                )}
               </select>
             <div className="invalid-tooltip">
               Please select a office

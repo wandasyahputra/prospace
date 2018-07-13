@@ -29,7 +29,6 @@ export const dispatchRemoveCompanyProfile = (data) => {
   }
 }
 export const dispatchAddMeetingRoom = (data) => {
-  console.log('sini    ',data);
   return dispatch => {
     dispatch(actionAddMeetingRoom(data))
   }

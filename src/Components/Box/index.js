@@ -20,7 +20,7 @@ class Box extends Component {
           {
             headKeys&&headKeys.map((item,key)=>(
             <div className="content">
-              <div className="content-label">{item.replace('_',' ')} :</div>
+              <div className="content-label">{item.replace(/_/g,' ')} :</div>
               <div className="content-body">{headValues[key]}</div>
             </div>
           ))

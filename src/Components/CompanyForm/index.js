@@ -28,7 +28,6 @@ class CompanyForm extends Component {
         phone:''
       })
     }else{
-      console.log(this.state);
       document.getElementsByClassName('companyForm')[0].className='needs-validation was-validated companyForm'
     }
   }

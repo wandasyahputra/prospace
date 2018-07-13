@@ -35,28 +35,29 @@ class Rooms extends Component {
   }
   removeRoom(){
     this.props.removeMeetingRoom({
-      company_id:this.state.room.company,
-      office_id:this.state.room.office,
+      company_id:this.props.match.params.companyId,
+      office_id:this.props.match.params.officeId,
       id:this.state.room.id
     })
     this.resetState()
   }
   changePage(a){
-    this.props.changePage({
-      page:'offices',
-      companyId:a
-    })
+    window.location=`/company/${a}`
   }
   render() {
     let that=this
-    var found = this.props.companyProfile.find(function(element) {
-      console.log(element);
-      return element.id === parseInt(that.props.companyId,10);
+    var company = this.props.companyProfile.find(function(element) {
+      return element.id === parseInt(that.props.match.params.companyId,10);
     });
-    found = found.office.find(function(element) {
-      console.log(element);
-      return element.id === parseInt(that.props.officeId,10);
+    if(typeof company === 'undefined'){
+      window.location=`/overviews`
+    }
+    var found = company.office.find(function(element) {
+      return element.id === parseInt(that.props.match.params.officeId,10);
     });
+    if(typeof found === 'undefined'){
+      window.location=`/company/${that.props.match.params.companyId}`
+    }
     let date= found.office_start_date.split('-')
     return (
       <div className="container">
@@ -68,7 +69,7 @@ class Rooms extends Component {
             cancel={()=>this.resetState()}
           />)
         }
-        <div className="Offices">
+        <div className="Rooms">
           <div className="row">
               <div className="header">
                 <h4>{found.name}</h4>
@@ -94,10 +95,9 @@ class Rooms extends Component {
             <button className="btn btn-primary bottomRight-absolute" onClick={()=>this.changePage(found.company_id)}>Back To Office</button>
           </div>
           <div className="row box-container">
-            {found.meeting_room?(found.meeting_room.length>0&&found.meeting_room.map((item,key)=>{
+            {found.meeting_room&&found.meeting_room.length>0?(found.meeting_room.map((item,key)=>{
               return(
                 <Box
-                  type="office"
                   key={key}
                   data={
                     {
@@ -108,7 +108,7 @@ class Rooms extends Component {
                       Seats:item.seat
                      }
                   }
-                  remove={()=>this.callModal(item.id,item.name,found.id,this.props.companyId)}
+                  remove={()=>this.callModal(item.id,item.name,found.id,this.props.match.params.companyId)}
                 />
               )
             }

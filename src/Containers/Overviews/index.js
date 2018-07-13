@@ -17,7 +17,6 @@ class Overviews extends Component {
     this.changePage = this.changePage.bind(this)
   }
   callModal(id,name){
-    console.log('hereeee');
     this.setState({
       company:{
         id,
@@ -37,11 +36,9 @@ class Overviews extends Component {
     this.resetState()
   }
   changePage(companyId){
-    this.props.changePage({
-      page:'offices',
-      companyId:companyId
-    })
+    window.location=`/company/${companyId}`
   }
+
   render() {
     return (
       <div className="container">
@@ -79,10 +76,8 @@ class Overviews extends Component {
               for(let i = 0; i < item.office.length; i++){
                 room=room+item.office[i].meeting_room.length
               }
-              console.log('herer');
               return (<Box
                 key={key}
-                type="overview"
                 data={
                   {
                     Name:item.name,
