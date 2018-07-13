@@ -34,7 +34,6 @@ class OfficeForm extends Component {
     }
   }
   createOffice(){
-    console.log(this.state);
     if((this.state.name!=='')&&(this.state.lat!=='')&&(this.state.lng!=='')&&(this.state.office_start_date!=='')&&(this.state.company!=='')){
       this.props.addCompanyOffice({
         company_id:this.state.company,
@@ -45,9 +44,8 @@ class OfficeForm extends Component {
         meeting_room:[],
         office_start_date:this.state.office_start_date,
       })
-      this.props.changePage(this.state.company)
+      window.location=`/company/${this.state.company}`
     }else{
-      console.log(this.state);
       document.getElementsByClassName('officeForm')[0].className='needs-validation was-validated officeForm'
     }
   }

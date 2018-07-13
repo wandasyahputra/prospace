@@ -41,24 +41,19 @@ class Offices extends Component {
   }
   changePage(id){
     if(id){
-      this.props.changePage({
-        page:'rooms',
-        companyId:this.props.companyId,
-        officeId:id
-      })
+      window.location=`/company/${this.props.match.params.companyId}/office/${id}`
     }else {
-      this.props.changePage({
-        page:'overviews',
-        companyId:'',
-        officeId:''
-      })
+      window.location=`/overviews`
     }
   }
   render() {
     let that=this
     var found = this.props.companyProfile.find(function(element) {
-      return element.id === parseInt(that.props.companyId,10);
+      return element.id === parseInt(that.props.match.params.companyId,10);
     });
+    if(typeof found==='undefined'){
+      window.location='/overviews'
+    }
     return (
       <div className="container">
         {this.state.modal&&
@@ -97,11 +92,10 @@ class Offices extends Component {
             />
           </div>
           <div className="row box-container">
-            {found.office?(found.office.length>0&&found.office.map((item,key)=>{
+            {found.office&&found.office.length>0?(found.office.map((item,key)=>{
               let date= item.office_start_date.split('-')
               return(
                 <Box
-                  type="office"
                   key={key}
                   data={
                     {

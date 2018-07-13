@@ -5,5 +5,5 @@ export const REMOVE_COMPANY_ADDRESS = 'REMOVE_COMPANY_ADDRESS'
 export const ADD_MEETING_ROOM = 'ADD_MEETING_ROOM'
 export const REMOVE_MEETING_ROOM = 'REMOVE_MEETING_ROOM'
 export const RESTORE_COMPANY_DATA = 'RESTORE_COMPANY_DATA'
-export const RE1 = /[0-9]/;  // NOTE: REGEX for Number
+export const RE1 = /^[0-9]+$/;  // NOTE: REGEX for Number
 export const RE2 = /^[0-9.]+$/; // NOTE: REGEX for LatLng
