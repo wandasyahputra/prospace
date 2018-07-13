@@ -11,6 +11,7 @@ class CompanyForm extends Component {
       address:'',
       revenue:'',
       cCode:'+62',
+      id:'',
       phone:''
     }
     this.createCompany = this.createCompany.bind(this)
@@ -18,7 +19,11 @@ class CompanyForm extends Component {
   }
   createCompany(){
     if((this.state.name!=='')&&(this.state.address!=='')&&(this.state.revenue!=='')&&(this.state.cCode!=='')&&(this.state.phone!=='')){
-      this.props.addCompanyProfile(this.state)
+      let data={
+        ...this.state,
+        id:new Date().getTime(),
+      }
+      this.props.addCompanyProfile(data)
       this.props.success()
       this.setState({
         name:'',
