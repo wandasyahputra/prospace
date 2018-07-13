@@ -44,7 +44,7 @@ class OfficeForm extends Component {
         meeting_room:[],
         office_start_date:this.state.office_start_date,
       })
-      window.location=`/office/${this.state.company}`
+      window.location=`/company/${this.state.company}`
     }else{
       document.getElementsByClassName('officeForm')[0].className='needs-validation was-validated officeForm'
     }

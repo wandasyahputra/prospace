@@ -42,17 +42,22 @@ class Rooms extends Component {
     this.resetState()
   }
   changePage(a){
-    window.location=`/office/${a}`
+    window.location=`/company/${a}`
   }
   render() {
     let that=this
-    var found = this.props.companyProfile.find(function(element) {
+    var company = this.props.companyProfile.find(function(element) {
       return element.id === parseInt(that.props.match.params.companyId,10);
     });
-    found = found.office.find(function(element) {
+    if(typeof company === 'undefined'){
+      window.location=`/overviews`
+    }
+    var found = company.office.find(function(element) {
       return element.id === parseInt(that.props.match.params.officeId,10);
     });
-    console.log(found);
+    if(typeof found === 'undefined'){
+      window.location=`/company/${that.props.match.params.companyId}`
+    }
     let date= found.office_start_date.split('-')
     return (
       <div className="container">
@@ -93,7 +98,6 @@ class Rooms extends Component {
             {found.meeting_room&&found.meeting_room.length>0?(found.meeting_room.map((item,key)=>{
               return(
                 <Box
-                  type="office"
                   key={key}
                   data={
                     {

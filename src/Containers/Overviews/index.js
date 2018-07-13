@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {dispatchRemoveCompanyProfile} from '../../dispatcher';
 import {Box,CompanyForm,OfficeForm,ModalDecision} from '../../Components'
-import {Redirect} from 'react-router-dom'
 import './Overviews.css'
 
 class Overviews extends Component {
@@ -18,7 +17,6 @@ class Overviews extends Component {
     this.changePage = this.changePage.bind(this)
   }
   callModal(id,name){
-    console.log('hereeee');
     this.setState({
       company:{
         id,
@@ -38,11 +36,10 @@ class Overviews extends Component {
     this.resetState()
   }
   changePage(companyId){
-    window.location=`/office/${companyId}`
+    window.location=`/company/${companyId}`
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="container">
         {this.state.modal&&
@@ -79,10 +76,8 @@ class Overviews extends Component {
               for(let i = 0; i < item.office.length; i++){
                 room=room+item.office[i].meeting_room.length
               }
-              console.log('herer');
               return (<Box
                 key={key}
-                type="overview"
                 data={
                   {
                     Name:item.name,

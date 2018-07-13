@@ -33,8 +33,8 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path='/overviews' component={Overviews}/>
-          <Route exact path='/office/:companyId' component={Offices}/>
-          <Route exact path='/rooms/:companyId/:officeId' component={Rooms}/>
+          <Route exact path='/company/:companyId' component={Offices}/>
+          <Route exact path='/company/:companyId/office/:officeId' component={Rooms}/>
           <Redirect to={'/overviews'}/>
         </Switch>
       </BrowserRouter>

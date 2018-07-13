@@ -41,7 +41,7 @@ class Offices extends Component {
   }
   changePage(id){
     if(id){
-      window.location=`/rooms/${this.props.match.params.companyId}/${id}`
+      window.location=`/company/${this.props.match.params.companyId}/office/${id}`
     }else {
       window.location=`/overviews`
     }
@@ -51,6 +51,9 @@ class Offices extends Component {
     var found = this.props.companyProfile.find(function(element) {
       return element.id === parseInt(that.props.match.params.companyId,10);
     });
+    if(typeof found==='undefined'){
+      window.location='/overviews'
+    }
     return (
       <div className="container">
         {this.state.modal&&
@@ -93,7 +96,6 @@ class Offices extends Component {
               let date= item.office_start_date.split('-')
               return(
                 <Box
-                  type="office"
                   key={key}
                   data={
                     {
