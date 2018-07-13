@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
+import {Route, Redirect, Switch, BrowserRouter} from 'react-router-dom'
 import {dispatchRestoreCompanyData} from './dispatcher'
 import {Offices,Overviews,Rooms} from './Containers'
 import './App.css';
@@ -29,16 +30,14 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        {this.state.page==='offices'?(
-          <Offices changePage={this.changePage} companyId={this.state.companyId}/>
-        ):(this.state.page==='overviews'?(
-          <Overviews changePage={this.changePage}/>
-        ):(
-          <Rooms changePage={this.changePage} companyId={this.state.companyId} officeId={this.state.officeId}/>
-        ))
-        }
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/overviews' component={Overviews}/>
+          <Route exact path='/office/:companyId' component={Offices}/>
+          <Route exact path='/rooms/:companyId/:officeId' component={Rooms}/>
+          <Redirect to={'/overviews'}/>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

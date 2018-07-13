@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {dispatchRemoveCompanyProfile} from '../../dispatcher';
 import {Box,CompanyForm,OfficeForm,ModalDecision} from '../../Components'
+import {Redirect} from 'react-router-dom'
 import './Overviews.css'
 
 class Overviews extends Component {
@@ -37,12 +38,11 @@ class Overviews extends Component {
     this.resetState()
   }
   changePage(companyId){
-    this.props.changePage({
-      page:'offices',
-      companyId:companyId
-    })
+    window.location=`/office/${companyId}`
   }
+
   render() {
+    console.log(this.props)
     return (
       <div className="container">
         {this.state.modal&&

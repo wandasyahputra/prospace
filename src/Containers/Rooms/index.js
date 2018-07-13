@@ -35,27 +35,24 @@ class Rooms extends Component {
   }
   removeRoom(){
     this.props.removeMeetingRoom({
-      company_id:this.state.room.company,
-      office_id:this.state.room.office,
+      company_id:this.props.match.params.companyId,
+      office_id:this.props.match.params.officeId,
       id:this.state.room.id
     })
     this.resetState()
   }
   changePage(a){
-    this.props.changePage({
-      page:'offices',
-      companyId:a
-    })
+    window.location=`/office/${a}`
   }
   render() {
     let that=this
     var found = this.props.companyProfile.find(function(element) {
       console.log(element);
-      return element.id === parseInt(that.props.companyId,10);
+      return element.id === parseInt(that.props.match.params.companyId,10);
     });
     found = found.office.find(function(element) {
       console.log(element);
-      return element.id === parseInt(that.props.officeId,10);
+      return element.id === parseInt(that.props.match.params.officeId,10);
     });
     let date= found.office_start_date.split('-')
     return (
@@ -108,7 +105,7 @@ class Rooms extends Component {
                       Seats:item.seat
                      }
                   }
-                  remove={()=>this.callModal(item.id,item.name,found.id,this.props.companyId)}
+                  remove={()=>this.callModal(item.id,item.name,found.id,this.props.match.params.companyId)}
                 />
               )
             }

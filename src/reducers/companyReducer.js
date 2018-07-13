@@ -20,7 +20,7 @@ const addCompanyProfile = (state, data) => {
       {
         address:data.address,
         cCode:data.cCode,
-        id:new Date().getTime(),
+        id:data.id,
         name:data.name,
         phone:data.phone,
         revenue:data.revenue,
@@ -97,6 +97,7 @@ const removeCompanyOffice = (state, data) => {
 }
 
 const removeMeetingRoom = (state, data) => {
+  console.log(data);
   let temp = []
   let temp_state = state.dataCompanyProfile
   for(let i = 0;i < temp_state.length; i++){
@@ -111,8 +112,8 @@ const removeMeetingRoom = (state, data) => {
             if(temp_meeting_state[y].id!==parseInt(data.id,10)){
               temp_meeting.push(temp_meeting_state[y])
             }
-            temp_office_state[x].meeting_room=temp_meeting
           }
+          temp_office_state[x].meeting_room=temp_meeting
         }
         temp_office.push(temp_office_state[x])
       }
