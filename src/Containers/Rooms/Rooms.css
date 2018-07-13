@@ -1,27 +1,27 @@
-.Offices .row{
+.Rooms .row{
   margin:0px;
   position:relative;
 }
-.Offices .content{
+.Rooms .content{
   width: 100%;
 }
-.Offices .bottomRight-absolute{
+.Rooms .bottomRight-absolute{
   position: absolute;
   bottom: 20px;
   right: 0px;
 }
-.Offices>.row>.header{
+.Rooms>.row>.header{
   float:left;
   width: 100%;
   border-bottom: 1px solid #cecece;
   margin-bottom:10px;
 }
-.Offices>.content-container{
+.Rooms>.content-container{
   border-bottom: 1px solid #cecece;
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
-.Offices>.row>.header>h4{
+.Rooms>.row>.header>h4{
   float:left;
   cursor:pointer;
   font-weight: bold;

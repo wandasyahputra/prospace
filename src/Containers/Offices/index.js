@@ -43,7 +43,7 @@ class Offices extends Component {
     if(id){
       window.location=`/rooms/${this.props.match.params.companyId}/${id}`
     }else {
-      window.location=`overviews`
+      window.location=`/overviews`
     }
   }
   render() {
@@ -89,7 +89,7 @@ class Offices extends Component {
             />
           </div>
           <div className="row box-container">
-            {found.office?(found.office.length>0&&found.office.map((item,key)=>{
+            {found.office&&found.office.length>0?(found.office.map((item,key)=>{
               let date= item.office_start_date.split('-')
               return(
                 <Box

@@ -47,13 +47,12 @@ class Rooms extends Component {
   render() {
     let that=this
     var found = this.props.companyProfile.find(function(element) {
-      console.log(element);
       return element.id === parseInt(that.props.match.params.companyId,10);
     });
     found = found.office.find(function(element) {
-      console.log(element);
       return element.id === parseInt(that.props.match.params.officeId,10);
     });
+    console.log(found);
     let date= found.office_start_date.split('-')
     return (
       <div className="container">
@@ -65,7 +64,7 @@ class Rooms extends Component {
             cancel={()=>this.resetState()}
           />)
         }
-        <div className="Offices">
+        <div className="Rooms">
           <div className="row">
               <div className="header">
                 <h4>{found.name}</h4>
@@ -91,7 +90,7 @@ class Rooms extends Component {
             <button className="btn btn-primary bottomRight-absolute" onClick={()=>this.changePage(found.company_id)}>Back To Office</button>
           </div>
           <div className="row box-container">
-            {found.meeting_room?(found.meeting_room.length>0&&found.meeting_room.map((item,key)=>{
+            {found.meeting_room&&found.meeting_room.length>0?(found.meeting_room.map((item,key)=>{
               return(
                 <Box
                   type="office"
